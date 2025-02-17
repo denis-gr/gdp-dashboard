@@ -293,6 +293,13 @@ summa = summation(expr2, (parse_expr("n"), 0, parse_expr("oo"))).simplify()
 st.latex(latex(summa))
 st.code(summa)
 
+st.markdown("##### Ответ")
+ewrf = parse_expr(expression)
+ff = ewrf.subs(parse_expr("f(x)"), 0).subs(find_integral(ewrf), 0).simplify()
+ans = (integrate((summa * ff.subs("x", "t")).simplify(), find_integral(ewrf).args[1]) + ff).simplify()
+st.latex(latex(ans))
+st.code(ans)
+
 st.markdown("##### Методом приближения")
 f_0 = st.text_input("Введите f_0:", "1")
 try:
